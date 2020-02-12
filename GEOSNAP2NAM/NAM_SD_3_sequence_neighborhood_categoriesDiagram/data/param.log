@@ -1,15 +1,15 @@
-2020-01-06 17:02:07
+2020-01-29 08:33:55
   {'Maps_of_neighborhood': True,
    'Parallel_Categories_Diagram_in_neighborhoods': True,
    'Sequence': {'dist_type': 'tran', 'seq_clusters': 5},
    'county_fips': None,
    'filename_suffix': 'SD_3_sequence_neighborhood_categoriesDiagram',
-   'method': 'kmeans',
+   'method': 'gaussian_mixture',
    'msa_fips': '41740',
    'nClusters': 8,
    'state_fips': None,
-   'title': 'Neighborhood Analysis: Kmeans with Parallel Categories Diagram, San '
-            'Diego',
+   'title': 'Neighborhood Analysis: Gaussian Mixture Clustering with Parallel '
+            'Categories Diagram, San Diego',
    'variables': ['p_nonhisp_white_persons',
                  'p_nonhisp_black_persons',
                  'p_hispanic_persons',

@@ -332,7 +332,11 @@ def write_GEO_VARIABLES_js(community, param):
 	# clustering by method, nClusters with filtering by variables
 	#clusters = geosnap.analyze.cluster(community, method=method, n_clusters=nClusters, columns=variables)
 	#df = clusters.census[['year', method]]
-	clusters = community.cluster(columns=variables, method=method, n_clusters=nClusters)
+	
+	if (method == 'kmeans' or method == 'ward' or method == 'affinity_propagation' or method == 'spectral' or method == 'gaussian_mixture' or method == 'hdbscan'):
+		clusters = community.cluster(columns=variables, method=method, n_clusters=nClusters)
+	if (method == 'ward_spatial' or method == 'spenc' or method == 'skater' or method == 'azp' or method == 'max_p'):
+		clusters = community.cluster_spatial(columns=variables, method=method, n_clusters=nClusters)		
 	#print(clusters.gdf)
 	#print(clusters.gdf[['year', 'geoid', 'kmeans']])
 	
@@ -617,10 +621,20 @@ def write_ALL_METROS_VARIABLES_js(metros, param):
 		#print(community.gdf)
 		
 		# clustering by method, nClusters with filtering by variables
-		try:
-			clusters = community.cluster(columns=variables, method=method, n_clusters=nClusters)
-		except KeyError:
-			continue
+		#try:
+		if (method == 'kmeans' or method == 'ward' or method == 'affinity_propagation' or method == 'spectral' or method == 'gaussian_mixture' or method == 'hdbscan'):
+			try:
+				clusters = community.cluster(columns=variables, method=method, n_clusters=nClusters)
+			except KeyError:
+				continue
+				
+		if (method == 'ward_spatial' or method == 'spenc' or method == 'skater' or method == 'azp' or method == 'max_p'):
+			try:
+				clusters = community.cluster_spatial(columns=variables, method=method, n_clusters=nClusters)
+			except KeyError:
+				continue
+		#except KeyError:
+		#	continue
 		#print(clusters.gdf)
 		#print(clusters.gdf[['year', 'geoid', 'kmeans']])
 		
@@ -667,7 +681,7 @@ def write_ALL_METROS_VARIABLES_js(metros, param):
 	ofile.close()
 
 
-def Aspatial_Clustering_viz(param):
+def Clustering_viz(param):
 	write_LOG(param)
 	
 	# select community by state_fips, msa_fips, county_fips
@@ -733,7 +747,7 @@ def Aspatial_Clustering_viz(param):
 	print('Advanced options are available in ' + '"NAM_' + param['filename_suffix']+'/data/GEO_CONFIG.js"')
 	
 
-def Aspatial_Clustering_log():
+def Clustering_log():
 	# build array of logs from directory of 'NAM_'
 	logs = []
 	dirname = os.getcwd()
@@ -768,11 +782,11 @@ def Aspatial_Clustering_log():
 	ofile.write('<html>\n')
 	ofile.write('<head>\n')
 	ofile.write('  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>\n')
-	ofile.write('  <title>Adaptive Choropleth Mapper Logging</title>\n')
+	ofile.write('  <title>Neighborhood Analysis Logging</title>\n')
 	ofile.write('</head>\n')
 	ofile.write('<body>\n')
 	ofile.write('  <header>\n')
-	ofile.write('    <h1>Adaptive Choropleth Mapper Logging</h1>\n')
+	ofile.write('    <h1>Neighborhood Analysis Logging</h1>\n')
 	ofile.write('  </header>\n')
 	
 	for idx, val in enumerate(logs):
@@ -824,7 +838,7 @@ if __name__ == '__main__':
 		'filename_suffix': "All",
 		'allMetros': True,
 		'years': [1980, 1990, 2000, 2010],
-		'method': "kmeans",
+		'method': "ward_spatial",
 		'nClusters': 8,
 		'variables': [
 					  "p_nonhisp_white_persons", 
@@ -871,8 +885,8 @@ if __name__ == '__main__':
 	}
 	
 	
-	Aspatial_Clustering_viz(param)
-	#Aspatial_Clustering_log()
+	Clustering_viz(param)
+	#Clustering_log()
 	
 	ended_datetime = datetime.now()
 	elapsed = ended_datetime - started_datetime
