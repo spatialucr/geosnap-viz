@@ -2063,14 +2063,14 @@ function triggerStackedAreaChart() {
 		var mapN = "map" + i;
 		var row = {date: new Date(app.mYears[i], 1, 1)};
 		for (var j=0; j<app.maps.nPolygonbyClass.length; j++) {
-			var c = "Cluster" + j;
+			var c = "Neighborhood" + j;
 			row[c] = app[mapN].nPolygonbyClass[j];
 		}
 		data.push(row);
 	}
 	data["columns"] = ["date"];
 	for (var j=0; j<app.maps.nPolygonbyClass.length; j++) {
-		var c = "Cluster" + j;
+		var c = "Neighborhood" + j;
 		data["columns"].push(c);
 	}
 	//console.log(data);
@@ -4057,7 +4057,7 @@ function paintDensity(mIDX, {rankIdx="", eventData="", chosenState=0, baseYear="
 			fixedrange: true,
 			'title': 'Frequency'
 		},
-		'title': (item != 'INC') ? 'Cluster ' + cluster + '  in <b>' + item + '</b>' : '<b>INC  Distribution</b>',
+		'title': (item != 'INC') ? 'Neighborhood ' + cluster + '  in <b>' + item + '</b>' : '<b>INC  Distribution</b>',
     };
 	//console.log(layout);
 
@@ -4188,7 +4188,7 @@ function paintDensityGraphC(graphC, year, cluster) {
 			//range: [0, 3],
 			'title': 'Frequency'
 		},
-		'title': '<b>Cluster ' + cluster + '</b>  in ' + item,
+		'title': '<b>Neighborhood ' + cluster + '</b>  in ' + item,
     };
 	//console.log(layout);
 

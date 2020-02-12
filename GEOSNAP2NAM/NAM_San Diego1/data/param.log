@@ -1,4 +1,4 @@
-2020-01-29 08:22:22
+2020-01-09 23:18:00
   {'Chord_Diagram_in_neighborhoods': True,
    'Distribution_INC1': True,
    'Distribution_INC2_different_cluster': True,
@@ -8,12 +8,10 @@
    'Parallel_Categories_Diagram_in_neighborhoods': True,
    'Sequence': {'dist_type': 'tran', 'seq_clusters': 5},
    'Temporal_change_in_neighborhoods': True,
-   'county_fips': None,
-   'filename_suffix': 'SD_everything',
+   'filename_suffix': 'San Diego1',
    'method': 'kmeans',
    'msa_fips': '41740',
    'nClusters': 8,
-   'state_fips': None,
    'title': 'Neighborhood Analysis: Kmeans, San Diego',
    'variables': ['p_nonhisp_white_persons',
                  'p_nonhisp_black_persons',
